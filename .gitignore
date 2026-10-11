@@ -1,5 +1,7 @@
-data/raw/
-data/processed/
-.env
-__pycache__/
 .ipynb_checkpoints/
+__pycache__/
+data/raw/
+data/interim/
+data/processed/
+outputs/cartes/
+outputs/rapports/
