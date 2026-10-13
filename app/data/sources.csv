@@ -1,0 +1,20 @@
+﻿fichier,source,annee_donnees,annee_geographie,date_telechargement,url
+population_communes_2022.csv,INSEE,2022,2025,2026-08-12,https://www.insee.fr/fr/statistiques/8581696
+arrets_lignes_idfm.csv,Île-de-France Mobilités - Arrêts et lignes associées,2026,2026,2026-08-24,https://data.iledefrance-mobilites.fr/explore/dataset/arrets-lignes/
+traces_reseau_ferre_idfm.geojson,Île-de-France Mobilités - Tracés du réseau ferré,2024,2024,2026-08-24,https://data.iledefrance-mobilites.fr/explore/dataset/traces-du-reseau-ferre-idf/
+DS_BPE_CSV_FR.zip,INSEE - Base permanente des équipements 2025,2025,2026,2026-08-24,https://www.insee.fr/fr/statistiques/8217527?sommaire=8217537
+bpe_2025_detail.csv,Insee - Base permanente des équipements,2025,2025,2026-08-25,https://www.insee.fr/fr/statistiques/8217525
+population_iris_2022.xlsx,Insee - Population à l'IRIS,2022,2024,2026-10-07,https://www.insee.fr/fr/statistiques/8647014
+menages_familles_iris_2022.xlsx,Insee - Couples familles et ménages à l'IRIS,2022,2024,2026-10-07,https://www.insee.fr/fr/statistiques/8647008
+activite_iris_2022.xlsx,Insee - Activité des résidents à l'IRIS,2022,2024,2026-10-07,https://www.insee.fr/fr/statistiques/8647006
+diplomes_iris_2022.xlsx,Insee - Diplômes et formation à l'IRIS,2022,2024,2026-10-07,https://www.insee.fr/fr/statistiques/8647010
+logement_iris_2022.xlsx,Insee - Logement à l'IRIS,2022,2024,2026-10-07,https://www.insee.fr/fr/statistiques/8647012
+revenus_disponibles_iris_2021.xlsx,Insee - Filosofi - Revenus disponibles et pauvreté à l'IRIS,2021,2022,2026-01-07,https://www.insee.fr/fr/statistiques/8229323
+contours_iris.zip,IGN et Insee - Contours IRIS,2024,2024,2026-01-07,https://geoservices.ign.fr/contoursiris
+arrets-lignes.csv,IDFM — Arrêts et lignes associées,,,,https://data.iledefrance-mobilites.fr/explore/dataset/arrets-lignes/
+traces-du-reseau-ferre-idf.geojson,IDFM — Tracés géographiques du réseau ferré,,,,https://data.iledefrance-mobilites.fr/explore/dataset/traces-du-reseau-ferre-idf/
+traces-des-lignes-regulieres-de-bus-en-ile-de-france.geojson,IDFM — Tracés des lignes régulières de bus,,,,https://data.iledefrance-mobilites.fr/explore/dataset/traces-des-lignes-regulieres-de-bus-en-ile-de-france/
+referentiel-des-lignes.csv,IDFM — Référentiel des lignes commerciales,,,,https://data.iledefrance-mobilites.fr/explore/dataset/referentiel-des-lignes/
+profil_iris_idf_j14.csv,INSEE et sources amont — profils IRIS repris de J13D,2022,2024,,
+points_affectations_idf_j13c.csv,"INSEE — BPE, observations de restauration préparées dans J13c",2025,2025,,https://www.insee.fr/fr/statistiques/8217525
+profil_iris_idf_j14.csv,"INSEE — Filosofi, indicateurs fiscaux IRIS hérités",2021,2022,,
