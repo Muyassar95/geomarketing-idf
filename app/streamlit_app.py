@@ -16,7 +16,7 @@ from app.territory_map import territory_map
 st.set_page_config(page_title='Diagnostic territorial | Île-de-France',page_icon='📍',layout='wide')
 st.title('Diagnostic territorial en Île-de-France')
 st.write('Explorer la population, la restauration et les transports pour préparer une étude de marché et d’implantation.')
-DATA=Path(os.environ.get('GEOMARKETING_APP_DATA',ROOT/'data/app/j15'))
+DATA=Path(os.environ.get('GEOMARKETING_APP_DATA',ROOT/'app/data'))
 if not (DATA/'manifest.json').is_file():
     st.info('Les données de l’application ne sont pas encore préparées. Exécuter le notebook J15a, puis relancer l’application.')
     st.stop()
