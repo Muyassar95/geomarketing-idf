@@ -1,0 +1,105 @@
+{
+  "schema_version": 2,
+  "etape": "J15A_APPLICATION",
+  "statut": "PROTOTYPE_DESCRIPTIF",
+  "generation_utc": "2026-10-14T18:40:14.670784+00:00",
+  "annee_rp": 2022,
+  "geographie_iris": 2024,
+  "etape_base": "J13D",
+  "nb_iris": 5264,
+  "nb_communes": 1267,
+  "cartographie_regionale": true,
+  "simplification_carte_metres": 60,
+  "codes_focus": [
+    "95127",
+    "95500"
+  ],
+  "noms_focus": [
+    "Cergy",
+    "Pontoise"
+  ],
+  "rayons_metres": {
+    "METRO": 800,
+    "BUS": 300,
+    "RER": 800,
+    "TRANSILIEN": 800,
+    "TRAM": 500
+  },
+  "couverture_arrets_confirmee_idf": false,
+  "plafond_bus_carte_j14": 25,
+  "restaurants_geolocalises_charges": true,
+  "empreinte_metadata_j14": "1541f807ebe9ad85d0f7272d497e6741c5c0d2ab4a62cafc8bdb3572b24b4929",
+  "limites": [
+    "Proximité géométrique ; pas temps de marche.",
+    "Surface de territoire ; pas part d’habitants.",
+    "Même arrêt associé à plusieurs lignes : relation distincte du compte d’entités.",
+    "Niveaux d’arrêts non homogènes entre modes.",
+    "Traversée par un tracé ne prouve pas un arrêt.",
+    "Absence de fréquence, fréquentation, amplitude horaire et sens des courses.",
+    "Flux J13d communaux non affectés aux lignes/IRIS.",
+    "Population RP et réseau actuel de millésimes différents.",
+    "Les plafonds des cartes ne modifient pas les indicateurs."
+  ],
+  "fichiers": [
+    {
+      "nom": "profil_iris.csv",
+      "octets": 2520965,
+      "sha256": "4941daa24562c400d3480ac47f332513aac70211778ba5860b6faf8320cdba42"
+    },
+    {
+      "nom": "profil_communes.csv",
+      "octets": 215595,
+      "sha256": "e5a543da9a08a3031fdbb3d3873296f1a87419a44d4aa38103eb99a5ccf9ecd0"
+    },
+    {
+      "nom": "arrets.csv",
+      "octets": 2291378,
+      "sha256": "695705e81dcf0f1ac2f5b47439f657292430ce65d588734bf0838d841f8cd97d"
+    },
+    {
+      "nom": "lignes.csv",
+      "octets": 213184,
+      "sha256": "cff249f3480f6e7bacb97d2480603a54fe37d7c3cb35771191c0dc711745cce6"
+    },
+    {
+      "nom": "relations.csv",
+      "octets": 1727857,
+      "sha256": "8e99e466bb2de39e0ffb543c98cc8edc77fc514bb101f904c11ea22a645621f2"
+    },
+    {
+      "nom": "communes_idf.geojson",
+      "octets": 1989413,
+      "sha256": "8d48b8b27e2f04704ae31176fd9a5cdb02a55471e89e6a8d12eecabac04ac9ff"
+    },
+    {
+      "nom": "iris_idf.geojson",
+      "octets": 4074999,
+      "sha256": "226b1ddbe279e2c20fc962eefa70b776b17ea1f2f4c970f0b778fb6a4146e9a1"
+    },
+    {
+      "nom": "traces_idf.geojson",
+      "octets": 12772093,
+      "sha256": "e93b81256565a63a22388383e412f313d66b97a49f72d9e75628f1a82e52a305"
+    },
+    {
+      "nom": "iris_focus.geojson",
+      "octets": 31533,
+      "sha256": "aa5b7b6143dff21cb99be58968b5d571ee029abac56ba090a8026a8b330101bd"
+    },
+    {
+      "nom": "traces_focus.geojson",
+      "octets": 283947,
+      "sha256": "f6a2a739d534991eb435bb91990c63efbf09fe142ff31e901325125b54348a18"
+    },
+    {
+      "nom": "restaurants.csv",
+      "octets": 5090037,
+      "sha256": "e20ed95ab6710666cd79f3680a7313019a0785f2bd8ff408771abfe4230c8c6a"
+    },
+    {
+      "nom": "sources.csv",
+      "octets": 2760,
+      "sha256": "41864ce93845e97c359ff730f8c514f0175faa9e147eb044f85742fa7c1054b6"
+    }
+  ]
+}
