@@ -199,7 +199,8 @@ def territory_event(event,bundle):
     return None
 
 def build_territory_map(bundle,commune_code,iris_code=None,regional=False,
-                        department='Tous',indicator='POPULATION',modes=(),line_ids=(),show_restaurants=False):
+                        department='Tous',indicator='POPULATION',modes=(),line_ids=(),show_restaurants=False,
+                        show_commune_outline=True):
     if commune_code not in bundle['_communes_geo']:raise ValueError('Commune absente des contours.')
     if iris_code and (iris_code not in bundle['_iris_geo'] or bundle['_iris_geo'][iris_code]['properties']['CODGEO']!=commune_code):
         raise ValueError('L’IRIS sélectionné ne correspond pas à la commune.')
@@ -223,7 +224,7 @@ def build_territory_map(bundle,commune_code,iris_code=None,regional=False,
     geo=feature_collection(features)
     fig.add_trace(go.Choropleth(geojson=geo,featureidkey='properties.'+key,locationmode='geojson-id',
         locations=codes,z=[0]*len(codes),showscale=False,colorscale=[[0,'#e4e8ed'],[1,'#e4e8ed']],
-        marker_line_color='white',marker_line_width=.7,text=texts,
+        marker_line_color=('#607d8b' if regional and show_commune_outline else 'white'),marker_line_width=.7,text=texts,
         hovertemplate='%{text}<extra></extra>',meta={'ROLE':role}))
     values=table.reindex(codes)[indicator]
     valid=values.notna()
@@ -232,7 +233,7 @@ def build_territory_map(bundle,commune_code,iris_code=None,regional=False,
         fig.add_trace(go.Choropleth(geojson=geo,featureidkey='properties.'+key,locationmode='geojson-id',
             locations=ids,z=values.loc[ids].tolist(),colorscale='Blues',showscale=True,
             colorbar=dict(title=dict(text=LABELS.get(indicator,indicator),side='right'),thickness=15,len=.72,x=1.02),
-            marker_line_color='white',marker_line_width=.7,text=[texts[codes.index(x)] for x in ids],
+            marker_line_color=('#607d8b' if regional and show_commune_outline else 'white'),marker_line_width=.7,text=[texts[codes.index(x)] for x in ids],
             hovertemplate='%{text}<extra></extra>',meta={'ROLE':role}))
     selected=commune_code if regional else iris_code
     if selected and selected in codes:
@@ -242,6 +243,15 @@ def build_territory_map(bundle,commune_code,iris_code=None,regional=False,
             colorscale=[[0,'rgba(255,180,0,0.10)'],[1,'rgba(255,180,0,0.10)']],
             marker_line_color='#f59e0b',marker_line_width=2.8,
             text=[texts[codes.index(selected)]],hovertemplate='%{text}<extra></extra>',meta={'ROLE':role}))
+    if show_commune_outline and not regional:
+        outer=bundle['_communes_geo'][commune_code]['geometry']
+        polygons=[outer['coordinates']] if outer['type']=='Polygon' else outer['coordinates']
+        lon=[];lat=[]
+        for polygon in polygons:
+            for ring in polygon:
+                lon.extend([p[0] for p in ring]+[None]);lat.extend([p[1] for p in ring]+[None])
+        fig.add_trace(go.Scattergeo(lon=lon,lat=lat,mode='lines',line=dict(color='#132b3a',width=2.7),
+            showlegend=False,hoverinfo='skip',name='Limite communale',meta={'ROLE':'CONTOUR_COMMUNE'}))
     stats={'arrets_disponibles':0,'arrets_affiches':0,'restaurants_disponibles':0,'restaurants_affiches':0}
     if regional:
         fig.update_geos(visible=False,fitbounds='locations',projection_type='mercator')
