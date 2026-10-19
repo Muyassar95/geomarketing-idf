@@ -12,11 +12,16 @@ import plotly.express as px
 from app.core import (load_bundle,fmt,client_table,fiche,MODES,LABELS,
                       build_territory_map,local_network,territory_event)
 from app.territory_map import territory_map
+from app.reports import generate_report
+from app.design import apply_design
+from app.explorer import show_explorer
 
 st.set_page_config(page_title='Diagnostic territorial | Île-de-France',page_icon='📍',layout='wide')
+apply_design()
+st.markdown('<div class="geo-kicker">DONNÉES · TERRITOIRES · IMPLANTATION</div>',unsafe_allow_html=True)
 st.title('Diagnostic territorial en Île-de-France')
 st.write('Explorer la population, la restauration et les transports pour préparer une étude de marché et d’implantation.')
-DATA=Path(os.environ.get('GEOMARKETING_APP_DATA',ROOT/'app/data'))
+DATA=Path(os.environ.get('GEOMARKETING_APP_DATA',ROOT/'data/app/j15'))
 if not (DATA/'manifest.json').is_file():
     st.info('Les données de l’application ne sont pas encore préparées. Exécuter le notebook J15a, puis relancer l’application.')
     st.stop()
@@ -38,7 +43,8 @@ if pending:
     if st.session_state.get('departement','Tous') not in ['Tous',pending['commune'][:2]]:
         st.session_state['departement']=pending['commune'][:2]
     st.session_state['niveau_carte']='Commune et IRIS'
-    if pending['iris']:st.session_state['vue']='IRIS'
+    if pending.get('detail_niveau'):st.session_state['detail_niveau']=pending['detail_niveau']
+    if pending['iris'] and st.session_state.get('vue')!='Indicateurs détaillés':st.session_state['vue']='IRIS'
 
 def changer_commune():
     st.session_state['iris']=''
@@ -50,7 +56,7 @@ def changer_departement():
 
 def changer_iris():
     st.session_state['niveau_carte']='Commune et IRIS'
-    if st.session_state.get('iris') and st.session_state.get('vue')!='Transports':
+    if st.session_state.get('iris') and st.session_state.get('vue') not in ['Transports','Indicateurs détaillés']:
         st.session_state['vue']='IRIS'
 
 def vue_regionale():
@@ -64,6 +70,7 @@ def vue_commune():
     st.session_state['iris']=''
 
 st.sidebar.header('Territoire étudié')
+show_outline=st.sidebar.checkbox('Afficher les contours communaux',True,key='contours_communes')
 deps=['Tous']+sorted(communes['CODGEO'].str[:2].unique())
 dep=st.sidebar.selectbox('Département',deps,key='departement',on_change=changer_departement)
 available=communes if dep=='Tous' else communes.loc[communes['CODGEO'].str[:2].eq(dep)]
@@ -77,7 +84,7 @@ iris_options=['']+local['IRIS'].tolist();iris_names=local.set_index('IRIS')['NOM
 if st.session_state.get('iris','') not in iris_options:st.session_state['iris']=''
 ident=st.sidebar.selectbox('IRIS',iris_options,index=iris_options.index(st.session_state.get('iris','')),format_func=lambda x:'Tous les IRIS de la commune' if not x else str(iris_names.get(x,x))+' ('+x+')',key='iris',on_change=changer_iris)
 row=communes.set_index('CODGEO').loc[code]
-view=st.radio('Explorer',['Communes','IRIS','Transports','Sources et méthode'],horizontal=True,key='vue')
+view=st.radio('Explorer',['Communes','IRIS','Indicateurs détaillés','Transports','Sources et méthode'],horizontal=True,key='vue')
 st.sidebar.caption('Cliquer sur une commune pour afficher ses IRIS, puis sur un IRIS pour consulter sa fiche. Les flux de travail restent communaux.')
 
 def afficher_carte(regional=False,transports=False):
@@ -103,7 +110,7 @@ def afficher_carte(regional=False,transports=False):
         chosen=st.multiselect('Lignes à afficher',ls,format_func=lambda x:labels[x],key='lignes')
     restos=st.checkbox('Afficher les restaurants',True,key='restaurants') if not regional else False
     fig,counts=build_territory_map(data,code,ident or None,regional=regional,department=dep,
-        indicator=indicator,modes=modes,line_ids=chosen,show_restaurants=restos)
+        indicator=indicator,modes=modes,line_ids=chosen,show_restaurants=restos,show_commune_outline=show_outline)
     event=territory_map(fig,data,ROOT/'app/assets')
     action=territory_event(event,data)
     if action and action['event_id']!=st.session_state.get('_last_territory_event'):
@@ -122,7 +129,7 @@ def afficher_carte(regional=False,transports=False):
             'AUCUN_OBJET_CORPUS':'Aucun objet dans le corpus'})
         st.dataframe(table.rename(columns={'LIBELLE_LIGNE':'Ligne','MODE':'Mode','STATUT_GEOMETRIQUE':'Disponibilité arrêts/tracés'}),hide_index=True,width='stretch')
 
-if view!='Sources et méthode':
+if view not in ['Sources et méthode','Indicateurs détaillés']:
     st.subheader('Carte des communes et IRIS')
     afficher_carte(
         regional=view=='Communes' and st.session_state.get('niveau_carte','Île-de-France')=='Île-de-France',
@@ -146,8 +153,8 @@ if view=='Communes':
             labels={'POPULATION':'Population','RESTAURANTS':'Restaurants observés'},title='Population et offre de restauration observée')
         st.plotly_chart(fig,use_container_width=True,config={'displaylogo':False})
     st.caption('Une faible densité ne démontre pas un besoin non satisfait. Une forte densité ne démontre pas une saturation.')
-    text=fiche(row,meta)
-    st.download_button('Télécharger la fiche descriptive',text.encode('utf-8'),file_name='fiche_commune_'+code+'.md',mime='text/markdown')
+    pdf=generate_report(data,code)
+    st.download_button('Télécharger la fiche communale (PDF)',pdf,file_name='fiche_commune_'+code+'.pdf',mime='application/pdf')
     st.download_button('Télécharger le tableau comparatif',client_table(available,cols).to_csv(index=False,sep=';').encode('utf-8-sig'),file_name='comparaison_communes.csv',mime='text/csv')
 elif view=='IRIS':
     st.subheader('Population et marché à l’échelle des IRIS')
@@ -174,7 +181,9 @@ elif view=='IRIS':
     if 'TRAM' not in meta['rayons_metres']:
         st.caption('Les indicateurs tramway ne sont pas encore calculés dans ces exports. Recalculer J14 puis J15a avec le mode TRAM.')
     st.caption('Le point IRIS est une référence géométrique intérieure. La distance directe ne mesure pas le temps de marche ; la surface proche ne mesure pas la population desservie.')
-    st.download_button('Télécharger la fiche IRIS',fiche(r,meta,True).encode('utf-8'),file_name='fiche_iris_'+ident+'.md',mime='text/markdown')
+    st.download_button('Télécharger la fiche IRIS (PDF)',generate_report(data,code,ident),file_name='fiche_iris_'+ident+'.pdf',mime='application/pdf')
+elif view=='Indicateurs détaillés':
+    show_explorer(data,DATA,Path(os.environ.get('GEOMARKETING_APP_DETAIL',ROOT/'data/app/j15b')),code,ident or None,ROOT/'app/assets',outline=show_outline)
 elif view=='Transports':
     st.subheader('Lignes, arrêts et restauration — '+row['NOM_COMMUNE'])
 else:
