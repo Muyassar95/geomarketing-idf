@@ -32,23 +32,6 @@ st.warning("DIAGNOSTIC J15 — chemin des données")
 
 manifeste = DATA / "manifest.json"
 
-st.json({
-    "script_execute": str(Path(__file__).resolve()),
-    "racine_calculee": str(ROOT),
-    "variable_GEOMARKETING_APP_DATA": os.environ.get(
-        "GEOMARKETING_APP_DATA"
-    ),
-    "dossier_utilise": str(DATA.resolve()),
-    "dossier_existe": DATA.is_dir(),
-    "manifeste_recherche": str(manifeste.resolve()),
-    "manifeste_existe": manifeste.is_file(),
-    "fichiers_dans_ce_dossier": (
-        sorted(f.name for f in DATA.iterdir())
-        if DATA.is_dir()
-        else []
-    ),
-})
-
 FICHIER_MANIFESTE = DATA / "manifest.json"
 
 if not FICHIER_MANIFESTE.is_file():
@@ -61,7 +44,6 @@ if not FICHIER_MANIFESTE.is_file():
         "Publier les exports générés par le notebook J15a "
         "dans data/app/j15/ du dépôt GitHub."
     )
-    st.stop()
     st.stop()
 @st.cache_data(show_spinner='Chargement des indicateurs…')
 def charger(directory,signature):return load_bundle(directory)
