@@ -24,7 +24,7 @@ st.write('Explorer la population, la restauration et les transports pour prépar
 DATA = Path(
     os.environ.get(
         "GEOMARKETING_APP_DATA",
-        str(ROOT / "data/app/j15"),
+        ROOT / "app/data/app/j15",
     )
 )
 
