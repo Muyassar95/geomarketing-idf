@@ -21,9 +21,26 @@ apply_design()
 st.markdown('<div class="geo-kicker">DONNÉES · TERRITOIRES · IMPLANTATION</div>',unsafe_allow_html=True)
 st.title('Diagnostic territorial en Île-de-France')
 st.write('Explorer la population, la restauration et les transports pour préparer une étude de marché et d’implantation.')
-DATA=Path(os.environ.get('GEOMARKETING_APP_DATA',ROOT/'data/app/j15'))
-if not (DATA/'manifest.json').is_file():
-    st.info('Les données de l’application ne sont pas encore préparées. Exécuter le notebook J15a, puis relancer l’application.')
+DATA = Path(
+    os.environ.get(
+        "GEOMARKETING_APP_DATA",
+        str(ROOT / "data/app/j15"),
+    )
+)
+
+FICHIER_MANIFESTE = DATA / "manifest.json"
+
+if not FICHIER_MANIFESTE.is_file():
+    st.error("Le manifeste des données J15a est introuvable.")
+
+    st.write("Chemin recherché :")
+    st.code(str(FICHIER_MANIFESTE))
+
+    st.write(
+        "Publier les exports générés par le notebook J15a "
+        "dans data/app/j15/ du dépôt GitHub."
+    )
+    st.stop()
     st.stop()
 @st.cache_data(show_spinner='Chargement des indicateurs…')
 def charger(directory,signature):return load_bundle(directory)
