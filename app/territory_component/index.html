@@ -8,16 +8,56 @@ body{margin:0;font:14px Arial,sans-serif;background:#fff;color:#172b4d}#map{widt
 .line[aria-pressed="false"]{opacity:.4}.line img{object-fit:contain;width:32px;height:32px}
 .number{display:inline-flex;align-items:center;justify-content:center;min-width:32px;padding:6px;color:white;text-shadow:0 1px 3px #000;font-weight:bold}
 .line:focus-visible{outline:3px solid #5091cb}#error{padding:18px;color:#9f1239}
-</style><script src="plotly.min.js"></script></head>
-<body><div id="error" role="alert" hidden></div><div id="map"></div>
+#status{padding:18px}#retry{margin:0 18px 18px;padding:8px 12px;cursor:pointer}
+</style></head>
+<body><div id="status" role="status">Chargement de la carte…</div><div id="error" role="alert" hidden></div>
+<button id="retry" type="button" hidden>Réessayer de charger la carte</button><div id="map"></div>
 <section id="legend"><h3>Lignes représentées</h3><p>Cliquer sur un logo pour masquer ou afficher son tracé.</p><div id="buttons"></div></section>
 <script>
 (function(){
   const gd=document.getElementById('map');const legend=document.getElementById('legend');
   function send(type,fields){window.parent.postMessage(Object.assign({isStreamlitMessage:true,type:type},fields),'*');}
   function height(){send('streamlit:setFrameHeight',{height:Math.ceil(document.body.scrollHeight)});}
-  const topo=fetch('world_110m.json').then(r=>{if(!r.ok)throw Error('Ressource géographique indisponible');return r.json();})
-    .then(t=>{window.PlotlyGeoAssets={topojson:{world_110m:t}};});
+  const VERSION='j15b-20261021-v2';const TIMEOUT=30000;
+  const status=document.getElementById('status');const error=document.getElementById('error');
+  const retry=document.getElementById('retry');let assetsPromise=null;let lastArgs=null;let plotlyApi=null;
+  function plotlyReady(){
+    const api=window.Plotly;
+    return api&&typeof api.react==='function'&&typeof api.restyle==='function'&&api.Plots&&typeof api.Plots.resize==='function';
+  }
+  function resource(name){const url=new URL(name,document.baseURI);url.searchParams.set('v',VERSION);return url.href;}
+  function loadPlotly(){
+    if(plotlyReady()){plotlyApi=window.Plotly;return Promise.resolve();}
+    return new Promise((resolve,reject)=>{
+      const script=document.createElement('script');script.async=true;script.src=resource('plotly.min.js');
+      let done=false;
+      const timer=setTimeout(()=>finish(Error('Délai de chargement dépassé pour plotly.min.js. Vérifier sa publication et la connexion.')),TIMEOUT);
+      function finish(err){if(done)return;done=true;clearTimeout(timer);script.onload=null;script.onerror=null;
+        if(err){script.remove();reject(err);}else resolve();}
+      script.onload=()=>{
+        if(!plotlyReady()){finish(Error('Plotly JavaScript est indisponible après le chargement de plotly.min.js. Publier le fichier complet fourni dans le correctif.'));return;}
+        plotlyApi=window.Plotly;finish();
+      };
+      script.onerror=()=>finish(Error('Impossible de charger plotly.min.js. Vérifier app/territory_component/plotly.min.js dans GitHub.'));
+      document.head.appendChild(script);
+    });
+  }
+  async function loadTopo(){
+    if(window.PlotlyGeoAssets&&window.PlotlyGeoAssets.topojson&&window.PlotlyGeoAssets.topojson.world_110m)return;
+    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),TIMEOUT);
+    try{
+      const response=await fetch(resource('world_110m.json'),{signal:controller.signal});
+      if(!response.ok)throw Error('world_110m.json indisponible (HTTP '+response.status+'). Vérifier sa publication.');
+      const topo=await response.json();
+      if(topo.type!=='Topology'||!topo.objects)throw Error('world_110m.json ne contient pas une topologie exploitable.');
+      window.PlotlyGeoAssets={topojson:{world_110m:topo}};
+    }catch(err){if(err.name==='AbortError')throw Error('Délai de chargement dépassé pour world_110m.json.');throw err;}
+    finally{clearTimeout(timer);}
+  }
+  function assets(){
+    if(!assetsPromise)assetsPromise=Promise.all([loadPlotly(),loadTopo()]).catch(err=>{assetsPromise=null;throw err;});
+    return assetsPromise;
+  }
   function traceIds(group){return gd.data.map((t,i)=>t.legendgroup===group?i:-1).filter(i=>i>=0);}
   function sync(){document.querySelectorAll('button.line').forEach(b=>{
     b.setAttribute('aria-pressed',String(traceIds(b.dataset.group).some(i=>gd.data[i].visible!==false&&gd.data[i].visible!=='legendonly')));
@@ -31,7 +71,7 @@ body{margin:0;font:14px Arial,sans-serif;background:#fff;color:#172b4d}#map{widt
       else{const n=document.createElement('span');n.className='number';n.style.backgroundColor=item.color;n.textContent=item.number;b.appendChild(n);}
       const name=document.createElement('span');name.textContent=item.name;b.appendChild(name);
       b.addEventListener('click',()=>{const ids=traceIds(item.group);const visible=ids.some(i=>gd.data[i].visible!==false&&gd.data[i].visible!=='legendonly');
-        Plotly.restyle(gd,{visible:visible?'legendonly':true},ids).then(sync);});container.appendChild(b);
+        if(plotlyApi)plotlyApi.restyle(gd,{visible:visible?'legendonly':true},ids).then(sync);});container.appendChild(b);
     });sync();
   }
   function clicked(event){
@@ -44,17 +84,25 @@ body{margin:0;font:14px Arial,sans-serif;background:#fff;color:#172b4d}#map{widt
   }
   let queue=Promise.resolve();
   async function render(args){
-    await topo;const spec=JSON.parse(args.figure);
-    await Plotly.react(gd,spec.data,spec.layout,{displaylogo:false,scrollZoom:true,responsive:true});
+    status.hidden=false;error.hidden=true;retry.hidden=true;
+    await assets();const spec=JSON.parse(args.figure);
+    if(!plotlyApi)throw Error('La bibliothèque JavaScript de la carte est indisponible. Vérifier plotly.min.js.');
+    await plotlyApi.react(gd,spec.data,spec.layout,{displaylogo:false,scrollZoom:true,responsive:true});
     gd.removeAllListeners('plotly_click');gd.removeAllListeners('plotly_restyle');
-    gd.on('plotly_click',clicked);gd.on('plotly_restyle',sync);buttons(args.legend||[]);height();
+    gd.on('plotly_click',clicked);gd.on('plotly_restyle',sync);buttons(args.legend||[]);status.hidden=true;height();
+  }
+  function schedule(args){
+    lastArgs=args;
+    queue=queue.then(()=>render(args)).catch(err=>{
+      status.hidden=true;error.hidden=false;error.textContent='Carte indisponible : '+err.message;retry.hidden=false;height();
+    });
   }
   window.addEventListener('message',event=>{
     if(event.source!==window.parent||!event.data||event.data.type!=='streamlit:render')return;
-    const args=event.data.args;
-    queue=queue.then(()=>render(args)).catch(e=>{const el=document.getElementById('error');el.hidden=false;el.textContent='Carte indisponible : '+e.message;height();});
+    schedule(event.data.args);
   });
-  window.addEventListener('resize',()=>{if(gd.data)Plotly.Plots.resize(gd);height();});
+  retry.addEventListener('click',()=>{if(lastArgs)schedule(lastArgs);});
+  window.addEventListener('resize',()=>{if(gd.data&&plotlyApi)plotlyApi.Plots.resize(gd);height();});
   send('streamlit:componentReady',{apiVersion:1});send('streamlit:setFrameHeight',{height:680});
 })();
 </script></body></html>
