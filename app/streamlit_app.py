@@ -28,6 +28,27 @@ DATA = Path(
     )
 )
 
+st.warning("DIAGNOSTIC J15 — chemin des données")
+
+manifeste = DATA / "manifest.json"
+
+st.json({
+    "script_execute": str(Path(__file__).resolve()),
+    "racine_calculee": str(ROOT),
+    "variable_GEOMARKETING_APP_DATA": os.environ.get(
+        "GEOMARKETING_APP_DATA"
+    ),
+    "dossier_utilise": str(DATA.resolve()),
+    "dossier_existe": DATA.is_dir(),
+    "manifeste_recherche": str(manifeste.resolve()),
+    "manifeste_existe": manifeste.is_file(),
+    "fichiers_dans_ce_dossier": (
+        sorted(f.name for f in DATA.iterdir())
+        if DATA.is_dir()
+        else []
+    ),
+})
+
 FICHIER_MANIFESTE = DATA / "manifest.json"
 
 if not FICHIER_MANIFESTE.is_file():
