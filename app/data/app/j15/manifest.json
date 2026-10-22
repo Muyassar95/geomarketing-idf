@@ -1,105 +1,347 @@
 {
-  "schema_version": 2,
-  "etape": "J15A_APPLICATION",
-  "statut": "PROTOTYPE_DESCRIPTIF",
-  "generation_utc": "2026-10-14T18:40:14.670784+00:00",
-  "annee_rp": 2022,
-  "geographie_iris": 2024,
-  "etape_base": "J13D",
-  "nb_iris": 5264,
-  "nb_communes": 1267,
-  "cartographie_regionale": true,
-  "simplification_carte_metres": 60,
-  "codes_focus": [
-    "95127",
-    "95500"
-  ],
-  "noms_focus": [
-    "Cergy",
-    "Pontoise"
-  ],
-  "rayons_metres": {
-    "METRO": 800,
-    "BUS": 300,
-    "RER": 800,
-    "TRANSILIEN": 800,
-    "TRAM": 500
+  "schema_version": 1,
+  "etape": "J15B_INDICATEURS_PDF",
+  "generation_utc": "2026-10-21T16:11:51.342949+00:00",
+  "base_manifest_sha256": "708010dd9d617350710a8fa871650e27eb4edcaba3bce2494742096c92f09773",
+  "nb_variables": 1348,
+  "nb_par_niveau": {
+    "COMMUNE": 1086,
+    "IRIS": 262
   },
-  "couverture_arrets_confirmee_idf": false,
-  "plafond_bus_carte_j14": 25,
-  "restaurants_geolocalises_charges": true,
-  "empreinte_metadata_j14": "1541f807ebe9ad85d0f7272d497e6741c5c0d2ab4a62cafc8bdb3572b24b4929",
-  "limites": [
-    "Proximité géométrique ; pas temps de marche.",
-    "Surface de territoire ; pas part d’habitants.",
-    "Même arrêt associé à plusieurs lignes : relation distincte du compte d’entités.",
-    "Niveaux d’arrêts non homogènes entre modes.",
-    "Traversée par un tracé ne prouve pas un arrêt.",
-    "Absence de fréquence, fréquentation, amplitude horaire et sens des courses.",
-    "Flux J13d communaux non affectés aux lignes/IRIS.",
-    "Population RP et réseau actuel de millésimes différents.",
-    "Les plafonds des cartes ne modifient pas les indicateurs."
+  "nb_territoires": {
+    "IRIS": 5264,
+    "COMMUNE": 1267
+  },
+  "themes": [
+    {
+      "niveau": "COMMUNE",
+      "theme": "AUTRES",
+      "fichier": "commune_autres.csv",
+      "nb_variables": 209
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "DIPLOMES",
+      "fichier": "commune_diplomes.csv",
+      "nb_variables": 68
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "EMPLOI",
+      "fichier": "commune_emploi.csv",
+      "nb_variables": 93
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "EQUIPEMENTS",
+      "fichier": "commune_equipements.csv",
+      "nb_variables": 307
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "LOGEMENTS",
+      "fichier": "commune_logements.csv",
+      "nb_variables": 22
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "MENAGES",
+      "fichier": "commune_menages.csv",
+      "nb_variables": 85
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "POPULATION",
+      "fichier": "commune_population.csv",
+      "nb_variables": 128
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "PRESELECTION",
+      "fichier": "commune_preselection.csv",
+      "nb_variables": 15
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "RESTAURATION",
+      "fichier": "commune_restauration.csv",
+      "nb_variables": 32
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "REVENUS",
+      "fichier": "commune_revenus.csv",
+      "nb_variables": 8
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "TECHNIQUE",
+      "fichier": "commune_technique.csv",
+      "nb_variables": 27
+    },
+    {
+      "niveau": "COMMUNE",
+      "theme": "TRANSPORTS",
+      "fichier": "commune_transports.csv",
+      "nb_variables": 92
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "AUTRES",
+      "fichier": "iris_autres.csv",
+      "nb_variables": 26
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "DIPLOMES",
+      "fichier": "iris_diplomes.csv",
+      "nb_variables": 33
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "EMPLOI",
+      "fichier": "iris_emploi.csv",
+      "nb_variables": 25
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "EQUIPEMENTS",
+      "fichier": "iris_equipements.csv",
+      "nb_variables": 1
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "LOGEMENTS",
+      "fichier": "iris_logements.csv",
+      "nb_variables": 21
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "MENAGES",
+      "fichier": "iris_menages.csv",
+      "nb_variables": 24
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "POPULATION",
+      "fichier": "iris_population.csv",
+      "nb_variables": 37
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "RESTAURATION",
+      "fichier": "iris_restauration.csv",
+      "nb_variables": 5
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "REVENUS",
+      "fichier": "iris_revenus.csv",
+      "nb_variables": 2
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "TECHNIQUE",
+      "fichier": "iris_technique.csv",
+      "nb_variables": 41
+    },
+    {
+      "niveau": "IRIS",
+      "theme": "TRANSPORTS",
+      "fichier": "iris_transports.csv",
+      "nb_variables": 47
+    }
+  ],
+  "sources": [
+    {
+      "fichier": "profil_iris_idf_j14.csv",
+      "sha256": "b0b09f672972f726ded322a51fc529de55fbd72d5d15658a0afaf6076711c76c"
+    },
+    {
+      "fichier": "profil_communes_idf_j14.csv",
+      "sha256": "70a6922395cb3cdb9c973bfc76ad558dc4332c4d9689a00beba210f418a534be"
+    },
+    {
+      "fichier": "metadata_transports_j14.json",
+      "sha256": "1541f807ebe9ad85d0f7272d497e6741c5c0d2ab4a62cafc8bdb3572b24b4929"
+    },
+    {
+      "fichier": "profil_communes_idf_j13e.csv",
+      "sha256": "2f24197372b91fe5c154ec15389d7691c550e9f10d76d21a2e2fbcf2d9456058"
+    },
+    {
+      "fichier": "profil_communes_idf_j12.csv",
+      "sha256": "f70de4223f83f3f3d3026e74b91f6c6019883c7e7c115e9b97bf547e2faab163"
+    },
+    {
+      "fichier": "dictionnaire_j13c.csv",
+      "sha256": "69b2b123baf256582e923bfa08b6c46abfe75fe7e4c659389b2a659d83c8eec8"
+    },
+    {
+      "fichier": "dictionnaire_j13d.csv",
+      "sha256": "62c348dd2652f8a33ed9f6d990dbc52b149e60acd35d9daf7dcf90b96841d80a"
+    },
+    {
+      "fichier": "dictionnaire_j13e.csv",
+      "sha256": "df8f785683dc5b2f231e057254e8d1063385c2f6b3eff4461e8ad8b3034a1b98"
+    },
+    {
+      "fichier": "dictionnaire_j14.csv",
+      "sha256": "f1c3c82ec456d9064803146623d57bfc3f32436e40bbe6d0b77ac10f785255f7"
+    }
   ],
   "fichiers": [
     {
-      "nom": "profil_iris.csv",
-      "octets": 2520965,
-      "sha256": "4941daa24562c400d3480ac47f332513aac70211778ba5860b6faf8320cdba42"
+      "nom": "catalogue.csv",
+      "sha256": "c726bb4f6fdd33857af2dd0f52305dea7f8a923c6112f7b1e471325af216bca6",
+      "octets": 424829
     },
     {
-      "nom": "profil_communes.csv",
-      "octets": 215595,
-      "sha256": "e5a543da9a08a3031fdbb3d3873296f1a87419a44d4aa38103eb99a5ccf9ecd0"
+      "nom": "compatibilite_sources_communes.csv",
+      "sha256": "224fb50944637d8c5d9d31c9ce73e0aec1b66ad81af0dab98a83ddb19eb87b67",
+      "octets": 127152
     },
     {
-      "nom": "arrets.csv",
-      "octets": 2291378,
-      "sha256": "695705e81dcf0f1ac2f5b47439f657292430ce65d588734bf0838d841f8cd97d"
+      "nom": "commune_autres.csv",
+      "sha256": "ec8272ba98fdc1a6ff0a1af2feffd7dfd67d87b6bd43be3ed089c3f6fa03ab38",
+      "octets": 1804222
     },
     {
-      "nom": "lignes.csv",
-      "octets": 213184,
-      "sha256": "cff249f3480f6e7bacb97d2480603a54fe37d7c3cb35771191c0dc711745cce6"
+      "nom": "commune_diplomes.csv",
+      "sha256": "17184bb7983621458f179b6e6a66c1b06d63c6632efe06ccf10fcad3b88985c5",
+      "octets": 1006106
     },
     {
-      "nom": "relations.csv",
-      "octets": 1727857,
-      "sha256": "8e99e466bb2de39e0ffb543c98cc8edc77fc514bb101f904c11ea22a645621f2"
+      "nom": "commune_emploi.csv",
+      "sha256": "70f82e6c51cc947604aef64352e2e6c003f5a63a0948e51f1ccb770b1170eace",
+      "octets": 1420637
     },
     {
-      "nom": "communes_idf.geojson",
-      "octets": 1989413,
-      "sha256": "8d48b8b27e2f04704ae31176fd9a5cdb02a55471e89e6a8d12eecabac04ac9ff"
+      "nom": "commune_equipements.csv",
+      "sha256": "a69e78af7c957269de83c8d9c8cd940846b39aa5902569341f50611c46113fb3",
+      "octets": 1534492
     },
     {
-      "nom": "iris_idf.geojson",
-      "octets": 4074999,
-      "sha256": "226b1ddbe279e2c20fc962eefa70b776b17ea1f2f4c970f0b778fb6a4146e9a1"
+      "nom": "commune_logements.csv",
+      "sha256": "501a6a7f54694cac8c5dc1b7cad2a289e37068928449ef320952c3457c595d3f",
+      "octets": 285346
     },
     {
-      "nom": "traces_idf.geojson",
-      "octets": 12772093,
-      "sha256": "e93b81256565a63a22388383e412f313d66b97a49f72d9e75628f1a82e52a305"
+      "nom": "commune_menages.csv",
+      "sha256": "d57698ebf41fb11f226dbf7fc2ee4729cdc5440cc610cf4bc117c90b6bdbcbf3",
+      "octets": 1144127
     },
     {
-      "nom": "iris_focus.geojson",
-      "octets": 31533,
-      "sha256": "aa5b7b6143dff21cb99be58968b5d571ee029abac56ba090a8026a8b330101bd"
+      "nom": "commune_population.csv",
+      "sha256": "d08572efa47c6dd338682641e4d6959d3d8632b10aee68de53252d57b32a0b19",
+      "octets": 1488364
     },
     {
-      "nom": "traces_focus.geojson",
-      "octets": 283947,
-      "sha256": "f6a2a739d534991eb435bb91990c63efbf09fe142ff31e901325125b54348a18"
+      "nom": "commune_preselection.csv",
+      "sha256": "caac7d5fa891aa7695f5c53644acb59428f78547f3efc54d58a6fd012bb479af",
+      "octets": 110911
     },
     {
-      "nom": "restaurants.csv",
-      "octets": 5090037,
-      "sha256": "e20ed95ab6710666cd79f3680a7313019a0785f2bd8ff408771abfe4230c8c6a"
+      "nom": "commune_restauration.csv",
+      "sha256": "145ca890de38feff001a72e383112c5ca9768a5db0d97fbfdd344b08af7b58cd",
+      "octets": 355644
     },
     {
-      "nom": "sources.csv",
-      "octets": 2760,
-      "sha256": "41864ce93845e97c359ff730f8c514f0175faa9e147eb044f85742fa7c1054b6"
+      "nom": "commune_revenus.csv",
+      "sha256": "5d4bd026f28746e2766115527acd8ca654dce2306d6da413cba7e4329a9850d8",
+      "octets": 107440
+    },
+    {
+      "nom": "commune_technique.csv",
+      "sha256": "9b029030fcf1ff69f24da0b1dd8dbc73baa0fa3ad91862f3ba0378b8452c3db0",
+      "octets": 412030
+    },
+    {
+      "nom": "commune_transports.csv",
+      "sha256": "423fe1a168e3b78f35c1a8e39fd2796810db21a05ce8272e4c6acf12bbb677b8",
+      "octets": 948698
+    },
+    {
+      "nom": "iris_autres.csv",
+      "sha256": "0e87763da45059658fc579235a51f3de06fa553b2f9349d68980bbb9f4aa66c7",
+      "octets": 1999071
+    },
+    {
+      "nom": "iris_diplomes.csv",
+      "sha256": "8a2235839bc3006bbc121bc2c0b02e1e98446eb6c4f2ae63615572aa3f05f764",
+      "octets": 3060033
+    },
+    {
+      "nom": "iris_emploi.csv",
+      "sha256": "e6ae993974375b1ba3369190a4827360c8e6e0bd6a838b6a88fa33ad4250736c",
+      "octets": 2178835
+    },
+    {
+      "nom": "iris_equipements.csv",
+      "sha256": "3138b93257b01a76dd8c219a088019d394236fbb655506f856f80e656079b781",
+      "octets": 204592
+    },
+    {
+      "nom": "iris_logements.csv",
+      "sha256": "d085b3cebf98ff89a338a6d813980780e1e47760108be449629a46612ef8ed69",
+      "octets": 1966866
+    },
+    {
+      "nom": "iris_menages.csv",
+      "sha256": "cf1a3841d936b9cc0c539d2e4e8db63e9a33548c6bb4130f7534ca1690742106",
+      "octets": 2277970
+    },
+    {
+      "nom": "iris_population.csv",
+      "sha256": "b4460240102ed31289e468b150c69a64cd4447f1a433024286f31607bd6ce458",
+      "octets": 3427311
+    },
+    {
+      "nom": "iris_restauration.csv",
+      "sha256": "5f2ae595569a36ff4c0ed0f961055415bb20c3a8fbd3c060675eb25ae8aeabd0",
+      "octets": 428650
+    },
+    {
+      "nom": "iris_revenus.csv",
+      "sha256": "981c6fd22ae6df68f24f93114289283052283985521484c8dc5d5bc870f08c5c",
+      "octets": 240357
+    },
+    {
+      "nom": "iris_technique.csv",
+      "sha256": "1f5fbb923c9158ade5ebb03e09b822ce66a57d5999adfab510f71e61bb5e854b",
+      "octets": 2262823
+    },
+    {
+      "nom": "iris_transports.csv",
+      "sha256": "6c6779cb4befb70f615157e424719c0fbbac945e3398159e917cb14adb5aa0c2",
+      "octets": 3235245
     }
-  ]
+  ],
+  "llm": {
+    "actif": false,
+    "etape_prevue": "J20",
+    "commentaires": "REGLES_DESCRIPTIVES"
+  },
+  "agregations_regionales": "NON_CALCULEES_J15B",
+  "incompatibilites_sources_communes": [
+    {
+      "SOURCE": "J12",
+      "FICHIER": "profil_communes_idf_j12.csv",
+      "CODGEO": "93059",
+      "STATUT": "CODE_ABSENT_SOURCE",
+      "MOTIF": ""
+    },
+    {
+      "SOURCE": "J12",
+      "FICHIER": "profil_communes_idf_j12.csv",
+      "CODGEO": "93066",
+      "STATUT": "PERIMETRE_INCOMPATIBLE_MEME_CODE",
+      "MOTIF": "Fusion Saint-Denis/Pierrefitte : données non réparties entre anciens contours"
+    }
+  ],
+  "revision_libelles_affichage": {
+    "version": "2026-10-22-prefixes-ages-v1",
+    "date_utc": "20261022T182850_740285Z",
+    "nb_libelles_modifies": 505
+  }
 }
