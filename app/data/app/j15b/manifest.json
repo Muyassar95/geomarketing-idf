@@ -193,8 +193,8 @@
   "fichiers": [
     {
       "nom": "catalogue.csv",
-      "sha256": "534ba2f1be6f58751fa2a8347f0bd98bb8212af2d778f4992e098ae2080583d4",
-      "octets": 426998
+      "sha256": "c726bb4f6fdd33857af2dd0f52305dea7f8a923c6112f7b1e471325af216bca6",
+      "octets": 424829
     },
     {
       "nom": "compatibilite_sources_communes.csv",
@@ -338,5 +338,10 @@
       "STATUT": "PERIMETRE_INCOMPATIBLE_MEME_CODE",
       "MOTIF": "Fusion Saint-Denis/Pierrefitte : données non réparties entre anciens contours"
     }
-  ]
+  ],
+  "revision_libelles_affichage": {
+    "version": "2026-10-22-prefixes-ages-v1",
+    "date_utc": "20261022T182850_740285Z",
+    "nb_libelles_modifies": 505
+  }
 }
