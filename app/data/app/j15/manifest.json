@@ -1,101 +1,105 @@
 {
-  "schema_version": 1,
-  "etape": "J17_ATTRACTIVITE_ETUDES",
-  "version": "2026-10-23-v1",
-  "generation_utc": "2026-10-23T18:05:03.142035+00:00",
-  "base_manifest_sha256": "708010dd9d617350710a8fa871650e27eb4edcaba3bce2494742096c92f09773",
+  "schema_version": 2,
+  "etape": "J15A_APPLICATION",
+  "statut": "PROTOTYPE_DESCRIPTIF",
+  "generation_utc": "2026-10-14T18:40:14.670784+00:00",
   "annee_rp": 2022,
   "geographie_iris": 2024,
-  "nb_communes": 1267,
+  "etape_base": "J13D",
   "nb_iris": 5264,
-  "nb_observations": 516711,
-  "sources_actives": [
-    "BPE"
+  "nb_communes": 1267,
+  "cartographie_regionale": true,
+  "simplification_carte_metres": 60,
+  "codes_focus": [
+    "95127",
+    "95500"
   ],
-  "qualite_bpe": {
-    "nb_lignes_nationales": 2921770,
-    "nb_obs_idf": 516711,
-    "nb_sans_commune": 21900,
-    "nb_sans_iris": 21900,
-    "nb_repetitions_siret_typequ_a_relire": 9168,
-    "deduplication_siret_automatique": false,
-    "couverture_declaree_complete": false
+  "noms_focus": [
+    "Cergy",
+    "Pontoise"
+  ],
+  "rayons_metres": {
+    "METRO": 800,
+    "BUS": 300,
+    "RER": 800,
+    "TRANSILIEN": 800,
+    "TRAM": 500
   },
-  "sources": [
-    {
-      "fichier": "BPE25.csv",
-      "source": "Insee — BPE, fichier détail",
-      "annee_donnees": 2025,
-      "annee_geographie": 2025,
-      "date_telechargement": "",
-      "url": "https://www.insee.fr/fr/statistiques/8217525",
-      "sha256": "47d4f3a1fa8e37c50d2821a70c630b77f0ea9350a947f5f269a1c90225dcbe48"
-    },
-    {
-      "fichier": "TYPEQU_2025_source.csv",
-      "source": "Insee — Nomenclature des types BPE",
-      "annee_donnees": 2025,
-      "annee_geographie": "",
-      "date_telechargement": "2026-10-23",
-      "url": "https://www.insee.fr/fr/metadonnees/source/fichier/TYPEQU_2025.csv",
-      "sha256": "5598b5939f6491e266276934c5526e442f773921d9baddb3873077cd2bce360e"
-    },
-    {
-      "fichier": "profil_communes_idf_j13e.csv",
-      "source": "Insee — Mobilités scolaires, traitement J13d/J13e",
-      "annee_donnees": "Voir ANNEE_RP",
-      "annee_geographie": "Voir GEOGRAPHIE_SOURCE",
-      "date_telechargement": "",
-      "url": "https://www.insee.fr/fr/statistiques/8589945?sommaire=8590191",
-      "sha256": "2f24197372b91fe5c154ec15389d7691c550e9f10d76d21a2e2fbcf2d9456058"
-    },
-    {
-      "fichier": "profil_iris_idf_j13c.gpkg",
-      "source": "Contours IRIS complets du projet",
-      "annee_donnees": "",
-      "annee_geographie": 2024,
-      "date_telechargement": "",
-      "url": "",
-      "sha256": "ba54352793be42d28ad821fcca998e851045afc5d044976be520ea6988678422"
-    }
+  "couverture_arrets_confirmee_idf": false,
+  "plafond_bus_carte_j14": 25,
+  "restaurants_geolocalises_charges": true,
+  "empreinte_metadata_j14": "1541f807ebe9ad85d0f7272d497e6741c5c0d2ab4a62cafc8bdb3572b24b4929",
+  "limites": [
+    "Proximité géométrique ; pas temps de marche.",
+    "Surface de territoire ; pas part d’habitants.",
+    "Même arrêt associé à plusieurs lignes : relation distincte du compte d’entités.",
+    "Niveaux d’arrêts non homogènes entre modes.",
+    "Traversée par un tracé ne prouve pas un arrêt.",
+    "Absence de fréquence, fréquentation, amplitude horaire et sens des courses.",
+    "Flux J13d communaux non affectés aux lignes/IRIS.",
+    "Population RP et réseau actuel de millésimes différents.",
+    "Les plafonds des cartes ne modifient pas les indicateurs."
   ],
   "fichiers": [
     {
-      "nom": "comptages_communes_j17.parquet",
-      "sha256": "99ec56e2c82441f078a375c836c266984441c54b849ebe0d4963adcf8017b989",
-      "octets": 545700
+      "nom": "profil_iris.csv",
+      "octets": 2520965,
+      "sha256": "4941daa24562c400d3480ac47f332513aac70211778ba5860b6faf8320cdba42"
     },
     {
-      "nom": "comptages_iris_j17.parquet",
-      "sha256": "a9678369e2b71ddbcd60b168ef08d570fa3161d3f9d31f46b9e947db8fc55b92",
-      "octets": 1537851
+      "nom": "profil_communes.csv",
+      "octets": 215595,
+      "sha256": "e5a543da9a08a3031fdbb3d3873296f1a87419a44d4aa38103eb99a5ccf9ecd0"
     },
     {
-      "nom": "points_j17.parquet",
-      "sha256": "ec636f9ec043a4f857862df003d94bdbc454149380a07de3a2fb76771ef6b081",
-      "octets": 22039709
+      "nom": "arrets.csv",
+      "octets": 2291378,
+      "sha256": "695705e81dcf0f1ac2f5b47439f657292430ce65d588734bf0838d841f8cd97d"
     },
     {
-      "nom": "population_etudes_communes_j17.csv",
-      "sha256": "607e3cd10e6996c1beef8c786b434b2396c943febaa49ab7d1a1e7bf134bc6e1",
-      "octets": 272700
+      "nom": "lignes.csv",
+      "octets": 213184,
+      "sha256": "cff249f3480f6e7bacb97d2480603a54fe37d7c3cb35771191c0dc711745cce6"
     },
     {
-      "nom": "nomenclature_types_j17.csv",
-      "sha256": "64e8ade7d482a0ddf7210a7c0bb08da99ac5b06bc48cd32c9fa67fbf19b25c09",
-      "octets": 18728
+      "nom": "relations.csv",
+      "octets": 1727857,
+      "sha256": "8e99e466bb2de39e0ffb543c98cc8edc77fc514bb101f904c11ea22a645621f2"
     },
     {
-      "nom": "dictionnaire_indicateurs_j17.csv",
-      "sha256": "5dd12c1d737057051f310254d53251c44a975c5dcd4d8c6a834f4dc95c93af60",
-      "octets": 1726
+      "nom": "communes_idf.geojson",
+      "octets": 1989413,
+      "sha256": "8d48b8b27e2f04704ae31176fd9a5cdb02a55471e89e6a8d12eecabac04ac9ff"
+    },
+    {
+      "nom": "iris_idf.geojson",
+      "octets": 4074999,
+      "sha256": "226b1ddbe279e2c20fc962eefa70b776b17ea1f2f4c970f0b778fb6a4146e9a1"
+    },
+    {
+      "nom": "traces_idf.geojson",
+      "octets": 12772093,
+      "sha256": "e93b81256565a63a22388383e412f313d66b97a49f72d9e75628f1a82e52a305"
+    },
+    {
+      "nom": "iris_focus.geojson",
+      "octets": 31533,
+      "sha256": "aa5b7b6143dff21cb99be58968b5d571ee029abac56ba090a8026a8b330101bd"
+    },
+    {
+      "nom": "traces_focus.geojson",
+      "octets": 283947,
+      "sha256": "f6a2a739d534991eb435bb91990c63efbf09fe142ff31e901325125b54348a18"
+    },
+    {
+      "nom": "restaurants.csv",
+      "octets": 5090037,
+      "sha256": "e20ed95ab6710666cd79f3680a7313019a0785f2bd8ff408771abfe4230c8c6a"
+    },
+    {
+      "nom": "sources.csv",
+      "octets": 2760,
+      "sha256": "41864ce93845e97c359ff730f8c514f0175faa9e147eb044f85742fa7c1054b6"
     }
-  ],
-  "limites": [
-    "Scolarisés 2 ans ou plus et 18-24 ans : effectifs RP, pas passages quotidiens ni étudiants du supérieur.",
-    "Données d’études communales : aucune répartition automatique entre IRIS ou campus.",
-    "BPE : observations d’équipements ; champ statistique, non annuaire exhaustif de toutes les entreprises.",
-    "Sources BPE/CNC/pôles distinctes ; pas d’addition des deux sources cinéma.",
-    "Pôles recensés : aucune fréquentation ni zone de chalandise déduite de leur seule localisation."
   ]
 }
