@@ -1,0 +1,11 @@
+﻿COLONNE;LIBELLE;UNITE;DEFINITION
+SCOLARISES_LIEU_ETUDES_2P;Personnes étudiant dans la commune (2 ans ou plus);personnes estimées;"Internes + entrants ; effectifs pondérés RP ; tous niveaux d’enseignement."
+SCOLARISES_ENTRANTS_2P;Personnes venant étudier depuis une autre commune;personnes estimées;Résidence dans une autre commune et lieu d’études dans la commune.
+SCOLARISES_RESIDENTS_2P;Personnes scolarisées résidant dans la commune;personnes estimées;Résidents du champ MOBSCO, quel que soit leur lieu d’études.
+SCOLARISES_18_24_LIEU_ETUDES;18-24 ans scolarisés dans la commune;personnes estimées;"Classe AGEREV10 = 18 ; ce champ ne se limite pas à l’enseignement supérieur."
+NB_INSCRITS_SUPERIEUR;Inscrits de l’enseignement supérieur;inscrits selon le champ source;"Source SIES distincte, année universitaire et champ explicités ; aucun ajout au RP."
+NB_OBSERVATIONS;Observations BPE affectées au territoire;observations BPE;"Unité équipement de la BPE, non établissement unique ; conservation des observations sans déduplication globale par SIRET."
+PART_DANS_DOMAINE_PCT;Part du type parmi les observations du même domaine;%;"Nombre du type / nombre du domaine BPE × 100 ; sources CNC et pôles exclues."
+DENSITE_10000_HAB;Observations BPE pour 10 000 habitants;observations BPE / 10 000 habitants;"Nombre d’observations affectées / population RP du socle × 10 000 ; couverture de géolocalisation à consulter."
+NB_ECRANS;Écrans de cinéma;écrans;"Capacité publiée par le CNC ; une ligne correspond à un site physique identifié."
+NB_FAUTEUILS;Fauteuils de cinéma;fauteuils;"Capacité publiée ; aucune estimation de fréquentation à partir des fauteuils."
