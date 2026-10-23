@@ -21,27 +21,9 @@ apply_design()
 st.markdown('<div class="geo-kicker">DONNÉES · TERRITOIRES · IMPLANTATION</div>',unsafe_allow_html=True)
 st.title('Diagnostic territorial en Île-de-France')
 st.write('Explorer la population, la restauration et les transports pour préparer une étude de marché et d’implantation.')
-DATA = Path(
-    os.environ.get(
-        "GEOMARKETING_APP_DATA",
-        str(ROOT / "app/data/app/j15"),
-    )
-)
-
-manifeste = DATA / "manifest.json"
-
-FICHIER_MANIFESTE = DATA / "manifest.json"
-
-if not FICHIER_MANIFESTE.is_file():
-    st.error("Le manifeste des données J15a est introuvable.")
-
-    st.write("Chemin recherché :")
-    st.code(str(FICHIER_MANIFESTE))
-
-    st.write(
-        "Publier les exports générés par le notebook J15a "
-        "dans data/app/j15/ du dépôt GitHub."
-    )
+DATA=Path(os.environ.get('GEOMARKETING_APP_DATA',ROOT/'data/app/j15'))
+if not (DATA/'manifest.json').is_file():
+    st.info('Les données de l’application ne sont pas encore préparées. Exécuter le notebook J15a, puis relancer l’application.')
     st.stop()
 @st.cache_data(show_spinner='Chargement des indicateurs…')
 def charger(directory,signature):return load_bundle(directory)
@@ -201,7 +183,7 @@ elif view=='IRIS':
     st.caption('Le point IRIS est une référence géométrique intérieure. La distance directe ne mesure pas le temps de marche ; la surface proche ne mesure pas la population desservie.')
     st.download_button('Télécharger la fiche IRIS (PDF)',generate_report(data,code,ident),file_name='fiche_iris_'+ident+'.pdf',mime='application/pdf')
 elif view=='Indicateurs détaillés':
-    show_explorer(data,DATA,Path(os.environ.get('GEOMARKETING_APP_DETAIL',ROOT/'app/data/app/j15b')),code,ident or None,ROOT/'app/assets',outline=show_outline)
+    show_explorer(data,DATA,Path(os.environ.get('GEOMARKETING_APP_DETAIL',ROOT/'data/app/j15b')),code,ident or None,ROOT/'app/assets',outline=show_outline)
 elif view=='Transports':
     st.subheader('Lignes, arrêts et restauration — '+row['NOM_COMMUNE'])
 else:
