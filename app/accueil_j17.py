@@ -67,7 +67,7 @@ def _fmt(v):
 def afficher_accueil_j17(racine,code,dossier_base,bundle):
     root=Path(racine)
     force=os.environ.get('GEOMARKETING_APP_J17')
-    candidats=[Path(force)] if force else [Path(dossier_base).parent/'j17',root/'data/app/j17',root/'app/data/app/j17']
+    candidats=[Path(force)] if force else [Path(dossier_base).parent/'j17',root/'app/data/app/j17',root/'app/data/app/j17']
     d=next((p for p in candidats if (p/'manifest.json').is_file()),None)
     if d is None:
         st.info('Les indicateurs sur les études, commerces et pôles sont en cours de préparation pour cette version.')
@@ -87,7 +87,7 @@ def afficher_accueil_j17(racine,code,dossier_base,bundle):
     cards=st.columns(4 if extra else 3)
     cards[0].metric('Personnes étudiant sur place · 2 ans ou plus',_fmt(r.get('SCOLARISES_LIEU_ETUDES_2P')),
         help='Personnes inscrites dans un établissement d’enseignement dont le lieu d’études déclaré se situe dans la commune ; effectifs estimés du recensement.')
-    cards[1].metric('18-24 ans scolarisés sur place',_fmt(r.get('SCOLARISES_18_24_LIEU_ETUDES')),
+    cards[1].metric('Population 18-24 ans scolarisée sur place',_fmt(r.get('SCOLARISES_18_24_LIEU_ETUDES')),
         help='Classe d’âge de 18 à 24 ans ; elle ne correspond pas uniquement aux étudiants du supérieur.')
     cards[2].metric('Venant étudier depuis une autre commune',_fmt(r.get('SCOLARISES_ENTRANTS_2P')))
     annee=str(r.get('ANNEE_RP','')).replace('.0','')
