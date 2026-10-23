@@ -28,8 +28,6 @@ DATA = Path(
     )
 )
 
-st.warning("DIAGNOSTIC J15 — chemin des données")
-
 manifeste = DATA / "manifest.json"
 
 FICHIER_MANIFESTE = DATA / "manifest.json"
