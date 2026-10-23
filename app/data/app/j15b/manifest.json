@@ -2,7 +2,7 @@
   "schema_version": 1,
   "etape": "J15B_INDICATEURS_PDF",
   "generation_utc": "2026-10-21T16:11:51.342949+00:00",
-  "base_manifest_sha256": "b51ffec8f2bbd2d1f5eb8276e521ffb8e9b075831f96dab87dab9d6da062d37a",
+  "base_manifest_sha256": "708010dd9d617350710a8fa871650e27eb4edcaba3bce2494742096c92f09773",
   "nb_variables": 1348,
   "nb_par_niveau": {
     "COMMUNE": 1086,
