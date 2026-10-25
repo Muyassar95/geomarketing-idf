@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "etape": "J18_GTFS_GEOMETRIES",
+  "generation_utc": "2026-10-25T12:18:51.254365+00:00",
+  "base_manifest_sha256": "708010dd9d617350710a8fa871650e27eb4edcaba3bce2494742096c92f09773",
+  "date_service": "2026-10-27",
+  "fuseau": "Europe/Paris",
+  "type_journee": "JOURNEE_DE_SERVICE_GTFS",
+  "geographie_iris": 2024,
+  "nb_communes": 1267,
+  "nb_iris": 5264,
+  "creneaux": [
+    {
+      "CRENEAU": "JOURNEE",
+      "DEBUT": "06:00:00",
+      "FIN": "26:00:00",
+      "START": 21600,
+      "END": 93600,
+      "DUREE_HEURES": 20.0
+    },
+    {
+      "CRENEAU": "MATIN",
+      "DEBUT": "07:00:00",
+      "FIN": "09:00:00",
+      "START": 25200,
+      "END": 32400,
+      "DUREE_HEURES": 2.0
+    },
+    {
+      "CRENEAU": "MIDI",
+      "DEBUT": "11:00:00",
+      "FIN": "14:00:00",
+      "START": 39600,
+      "END": 50400,
+      "DUREE_HEURES": 3.0
+    },
+    {
+      "CRENEAU": "SOIR",
+      "DEBUT": "17:00:00",
+      "FIN": "20:00:00",
+      "START": 61200,
+      "END": 72000,
+      "DUREE_HEURES": 3.0
+    }
+  ],
+  "qualite_horaires": {
+    "NB_LIGNES_STOP_TIMES_LUES": 12574512,
+    "NB_HORAIRES_ACTIFS": 2962349,
+    "NB_HEURES_NON_RENSEIGNEES": 1102,
+    "NB_MONTEES_NON_LIBRES": 157664,
+    "NB_COURSES_EN_CADENCE": 0
+  },
+  "qualite_contours": {
+    "NB_IRIS": 5264,
+    "NB_REPARATIONS": 0,
+    "COUVERTURE_TOPOLOGIQUE_VALIDE": true,
+    "CHEVAUCHEMENT_TOTAL_M2": 0.0,
+    "SURFACE_TOTALE_M2": 12064965178.124985
+  },
+  "sources": [
+    {
+      "fichier": "j18_gtfs_qualite_cartes.zip",
+      "source": "Île-de-France Mobilités — horaires GTFS",
+      "annee_donnees": 2026,
+      "annee_geographie": "",
+      "date_telechargement": "",
+      "url": "https://data.iledefrance-mobilites.fr/explore/dataset/offre-horaires-tc-gtfs-idfm/",
+      "sha256": "e5284778d3c8becc2e1ff54679a8512262d32b55990a4017083f69cc3648fd72"
+    },
+    {
+      "fichier": "profil_iris_idf_j14.gpkg",
+      "source": "Contours IRIS complets du projet — source IGN/Insee à vérifier",
+      "annee_donnees": 2024,
+      "annee_geographie": 2024,
+      "date_telechargement": "",
+      "url": "https://geoservices.ign.fr/contoursiris",
+      "sha256": "943149303e4aefcc0a42bce81d5b0f1bf3822fdafc15605ae016fa66e09228a2"
+    }
+  ],
+  "validations": {
+    "actif": false
+  },
+  "geometries_affichage_seulement": true,
+  "limites": [
+    "GTFS : horaires théoriques du flux archivé. Validations observées IDFM distinctes ; aucune donnée de temps réel.",
+    "Comptage par arrêt : ne pas interpréter les sommes territoriales comme des courses ou des voyageurs uniques.",
+    "Créneaux exprimés dans la journée de service, pouvant dépasser 24 h ; pas de conversion en journée civile.",
+    "Horaires intermédiaires absents non interpolés ; montées sur réservation et services flexibles hors du comptage.",
+    "Cadences exact_times=0 séparées des départs programmés ; aucune heure fictive créée.",
+    "Affectations territoriales par intérieur unique des contours complets ; frontières/coordonnées absentes restent non affectées.",
+    "Contours améliorés pour l’affichage ; les indicateurs spatiaux J14 et les données J15b restent ceux de leurs traitements d’origine.",
+    "Tracés conservés par forme/branche ; leur disponibilité et leur origine sont documentées par ligne.",
+    "Validations ferrées au périmètre de station, surface au périmètre de ligne administrative. Aucune répartition des volumes de ligne entre arrêts ou IRIS.",
+    "Les validations et les profils conservent leur période publiée ; aucun ratio d’occupation des véhicules déduit du GTFS d’une autre période.",
+    "Les jours absents restent absents et les valeurs censurées sont traitées par bornes. La moyenne porte sur les jours renseignés."
+  ],
+  "fichiers": [
+    {
+      "nom": "contours_iris.parquet",
+      "sha256": "80466a7818f96ec51344deb4242831a555d9551c7b9b9d345136aad9d2ccc4c3",
+      "octets": 11226959
+    },
+    {
+      "nom": "contours_communes.parquet",
+      "sha256": "d98e65af2333588a1b188aff5fee1ce26285e9a5e6fa10a0d909a362ad01d1c3",
+      "octets": 7817253
+    },
+    {
+      "nom": "traces_gtfs.parquet",
+      "sha256": "d6bc483c12629d6030c7dd912fb6b64908bb2364e2b0fad68c07916a7040d3d5",
+      "octets": 12241986
+    },
+    {
+      "nom": "lignes_gtfs.csv",
+      "sha256": "7fe98768ebcbb439a946f9a44175cfde98b56f8ac102c64714d916a31b67b08f",
+      "octets": 248482
+    },
+    {
+      "nom": "creneaux.csv",
+      "sha256": "65c54fdb696f319d4cb11677a1ed4487404530934a3fe5ce584cb4e8e5061c1d",
+      "octets": 210
+    },
+    {
+      "nom": "qualite_traces.csv",
+      "sha256": "64a4b3310998b5c771803768d279e7de63cf9f063f28a9f0dc2bd0045f89ce32",
+      "octets": 98748
+    },
+    {
+      "nom": "dictionnaire.csv",
+      "sha256": "445f87b31f8f9536b37c0a2579f8efb97d96c738f99a46ab85f38bda89e45bed",
+      "octets": 1603
+    },
+    {
+      "nom": "arrets_gtfs.parquet",
+      "sha256": "00c953c82a1816c51c9579ef460658586f95ac0ea3142f631ce7bf6ee593b973",
+      "octets": 1392182
+    },
+    {
+      "nom": "offre_arrets.parquet",
+      "sha256": "baf969e300e0b61f585143232be36d9035c7006af9fdbfaa0fd71f71d927d9d5",
+      "octets": 1536101
+    },
+    {
+      "nom": "offre_commune.parquet",
+      "sha256": "b2d78f75d5ef5b01218a3ed2e85eea40df1e5e75791bee67693bd5fb4165e5a5",
+      "octets": 107359
+    },
+    {
+      "nom": "offre_iris.parquet",
+      "sha256": "ef2b05259f5e05b07f99aa10fcca5a320e325167784e14d59417fa53b6a67c93",
+      "octets": 347468
+    }
+  ]
+}
