@@ -1,0 +1,9 @@
+﻿COLONNE;LIBELLE;UNITE;DEFINITION
+NB_DEPARTS_PROGRAMMES;Départs programmés aux arrêts;départs à un arrêt;Horaires publiés et cadences exact_times=1 dans [début, fin[, montées libres. Une course peut compter à plusieurs arrêts.
+NB_DEPARTS_ESTIMES_CADENCE;Volume estimé des services en cadence;équivalents de départs à un arrêt;Durée de recouvrement / headway_secs pour exact_times=0. Valeur distincte des départs programmés, sans horaires individuels inventés.
+DEPARTS_PROGRAMMES_PAR_HEURE;Départs programmés par heure sur le créneau;départs à un arrêt / heure;NB_DEPARTS_PROGRAMMES / durée du créneau. Ne mesure ni la régularité, ni le temps d’attente.
+NB_ARRETS_AVEC_DEPART;Arrêts GTFS proposant un départ;stop_id distincts;"Quais/points d’arrêt physiques ; les quais d’une station restent distincts."
+NB_LIGNES_GTFS;Lignes GTFS proposant un départ;route_id distincts;Route IDs distincts sur le créneau. Les noms courts seuls ne servent jamais de clé.
+VALIDATIONS_INF;Validations — valeur publiée ou borne basse;validations / journée d’exploitation;Somme des valeurs et bornes basses des cellules publiées. Ne représente pas des voyageurs uniques.
+VALIDATIONS_SUP;Validations — valeur publiée ou borne haute;validations / journée d’exploitation;"Somme des bornes hautes. Indisponible si une valeur manque ; aucune valeur censurée remplacée par une moyenne arbitraire."
+PCT_VALIDATIONS;Part horaire publiée des validations;%;Profil de la source par entité, série et type de jour. Pas de conversion automatique en volumes horaires.
